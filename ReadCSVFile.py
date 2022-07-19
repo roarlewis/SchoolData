@@ -6,7 +6,7 @@ def calculatedistance(lat,long):
     citycenter = (41.881832, -87.623177)
     return (geodesic(citycenter, (lat,long)).miles)
 
-with open(r'C:\Users\roarl\Downloads\Chicago_Public_Schools_-_School_Progress_Reports_SY2122.csv','r') as csv_file:
+with open('Chicago_Public_Schools_-_School_Progress_Reports_SY2122.csv','r') as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=',')
     line_count = 0
     schoolrowlist = []
