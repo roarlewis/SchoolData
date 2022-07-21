@@ -1,4 +1,6 @@
 import csv
+import numpy
+import pandas
 from geopy.distance import geodesic
 
 
@@ -10,21 +12,16 @@ with open('Chicago_Public_Schools_-_School_Progress_Reports_SY2122.csv','r') as 
     csv_reader = csv.reader(csv_file, delimiter=',')
     line_count = 0
     schoollist = []
-    coordlist = []
-    newschoollist = []
     for row in csv_reader:
         if line_count == 0:
             columnliststring = str(", ".join(row))
             columnlist = list(columnliststring.split(', '))
             line_count += 1
         else:
-            schoollist.append(row[columnlist.index('Long_Name')])
-            schoollist.append((float(row[columnlist.index('School_Latitude')]),(float(row[columnlist.index('School_Longitude')]))))
-            schoollist.append(calculatedistance((float(row[columnlist.index('School_Latitude')])),(float(row[columnlist.index('School_Longitude')]))))
             if (row[columnlist.index('SAT_Grade_11_Score_School_Avg')]) != '':
                 if int(row[columnlist.index('SAT_Grade_11_Score_School_Avg')]) > 0:
                     if int(row[columnlist.index('SAT_Grade_11_Score_School_Avg')]) <= 1600:
-                        newschoollist.append([row[columnlist.index('Long_Name')],(calculatedistance((float(row[columnlist.index('School_Latitude')])),(float(row[columnlist.index('School_Longitude')]))))])
+                        schoollist.append([row[columnlist.index('Long_Name')],(calculatedistance((float(row[columnlist.index('School_Latitude')])),(float(row[columnlist.index('School_Longitude')])))),int(row[columnlist.index('SAT_Grade_11_Score_School_Avg')])])
             line_count += 1
 
-print(newschoollist)
+print(schoollist)
