@@ -1,7 +1,7 @@
 import csv
 import numpy
 from geopy.distance import geodesic
-import seaborn
+import seaborn as sns
 
 def calculatedistance(lat,long):
     citycenter = (41.881832, -87.623177)
@@ -28,6 +28,5 @@ with open('Chicago_Public_Schools_-_School_Progress_Reports_SY2122.csv','r') as 
             line_count += 1
     x = numpy.array(x).reshape((-1,1))
     y = numpy.array(y)
-    seaborn.regplot(x=x,y=y)
-
+    sns.regplot(x=x,y=y)
 
